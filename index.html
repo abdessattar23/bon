@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <title>Bon à accomplir</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-beta.12/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <meta charset="utf-8" name="viewport" content= "width=device-width, initial-scale=1.0">
@@ -19,26 +21,55 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row"><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></th>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
+      <th scope="row"><textarea type="text" class="form-control" ></textarea></th>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
     </tr>
     <tr>
-      <th scope="row"><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></th>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
+      <th scope="row"><textarea type="text" class="form-control" ></textarea></th>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
     </tr>
     <tr>
-      <th scope="row"><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></th>
-      <td colspan="2"><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
-      <td><input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></td>
+      <th scope="row"><textarea type="text" class="form-control" ></textarea></th>
+      <td colspan="2"><textarea type="text" class="form-control" ></textarea></td>
+      <td><textarea type="text" class="form-control" ></textarea></td>
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary btn-lg">Add</button>
+<button type="button" class="btn btn-primary btn-lg" onclick="addRow()">Add</button>
+<button type="button" class="btn btn-success btn-lg" onclick="convertToPDF()">Print</button>
+ <script>
+function convertToPDF() {
+        html2canvas(document.querySelector('table')).then(function(canvas) {
+          var docDefinition = {
+            content: [
+              { image: canvas.toDataURL(), width: 500 }
+            ]
+          };
+          var pdfDoc = pdfMake.createPdf(docDefinition);
+
+          pdfDoc.download('bon.pdf');
+        });
+      };
+   function addRow() {
+    var table = document.querySelector("table");
+    var row = table.insertRow();
+    var cell1 = row.insertCell();
+    var cell2 = row.insertCell();
+    var cell3 = row.insertCell();
+    var cell4 = row.insertCell();
+    var cell5 = row.insertCell();
+    cell1.innerHTML = '<textarea type="text" class="form-control"></textarea>';
+    cell2.innerHTML = '<textarea type="text" class="form-control"></textarea>';
+    cell3.innerHTML = '<textarea type="text" class="form-control"></textarea>';
+    cell4.innerHTML = '<textarea type="text" class="form-control"></textarea>';
+    cell5.innerHTML = '<textarea type="text" class="form-control"></textarea>';
+  }
+  </script>
 </body>
 </html>
